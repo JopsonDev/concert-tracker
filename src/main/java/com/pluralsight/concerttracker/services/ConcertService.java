@@ -91,6 +91,30 @@ public class ConcertService {
         return promoterRepository.findPromoterById(input);
     }
 
+    public List<Concert> findConcertByYear(int year){
+        return concertRepository.findConcertByYear(year);
+    }
+
+    public List<Concert> findConcertByArtist(long id){
+        return concertRepository.findConcertByArtistId(id);
+    }
+
+    public List<Concert> findConcertByVenue(long id){
+        return concertRepository.findConcertByVenueId(id);
+    }
+
+    public List<Venue> findVenueByCity(String city){
+        return venueRepository.findVenueByCityIs(city);
+    }
+
+    public List<Venue> findVenueByName(String name){
+        return venueRepository.findVenueByName(name);
+    }
+
+    public List<Venue> findVenueWithMoreThanCap(int minCapacity){
+        return venueRepository.findVenueByCapacityGreaterThan(minCapacity);
+    }
+
 
 
 
