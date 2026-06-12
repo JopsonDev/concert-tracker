@@ -75,6 +75,21 @@ public class ConcertService {
     public void deletePromoter(Promoter promoter){
         promoterRepository.delete(promoter);
     }
+    public Concert findConcertById(long input){
+        return concertRepository.findConcertById(input);
+    }
+
+    public Artist findArtistById(long input){
+        return artistRepository.findArtistsById(input);
+    }
+
+    public Venue findVenueById(long input){
+        return venueRepository.findVenueById(input);
+    }
+
+    public Promoter findPromoterById(long input){
+        return promoterRepository.findPromoterById(input);
+    }
 
 
 

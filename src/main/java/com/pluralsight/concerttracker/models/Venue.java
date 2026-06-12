@@ -10,6 +10,7 @@ import org.hibernate.annotations.AnyDiscriminatorImplicitValues;
 public class Venue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String name;
     private String city;
     private int capacity;
@@ -46,5 +47,9 @@ public class Venue {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    public long getId() {
+        return id;
     }
 }
