@@ -6,7 +6,6 @@ import com.pluralsight.concerttracker.models.Promoter;
 import com.pluralsight.concerttracker.models.Venue;
 import com.pluralsight.concerttracker.services.ConcertService;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,11 +14,9 @@ import java.util.Scanner;
 @Component
 public class StartupRunner implements CommandLineRunner {
     private final ConcertService concertService;
-    private final DataSourceTransactionManager dataSourceTransactionManager;
 
-    public StartupRunner(ConcertService concertService, DataSourceTransactionManager dataSourceTransactionManager) {
+    public StartupRunner(ConcertService concertService) {
         this.concertService = concertService;
-        this.dataSourceTransactionManager = dataSourceTransactionManager;
     }
 
     @Override
@@ -42,17 +39,16 @@ public class StartupRunner implements CommandLineRunner {
 
                 switch (choice) {
                     case 1 -> concertsMenuAction(scanner);
-                    case 2 ->
-                    case 3 -> searchVenueAction(scanner);
-                    case 4 ->
-                    case 5 ->
-                    case 6 ->
+                    case 2 -> searchMenuAction(scanner);
+                    case 3 -> System.out.println("not yet");
+                    case 4 -> searchVenueAction(scanner);
+                    case 5 -> System.out.println("not yet");
+                    case 6 -> System.out.println("not yet");
                     case 0 -> {
                         running = false;
                         System.out.println("Goodbye!");
                     }
-                    default:
-                        System.out.println("Invalid option. Please choose 0 through 6.");
+                    default -> System.out.println("Invalid option. Please choose 0 through 6.");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a number.");
@@ -206,10 +202,10 @@ public class StartupRunner implements CommandLineRunner {
                     case 1 -> searchByYear(scanner);
                     case 2 -> searchByArtist(scanner);
                     case 3 -> searchByVenue(scanner);
-                    case 4 ->
-                    case 5 ->
-                    case 6 -> System.out.println();
-                    case 7 ->
+                    case 4 -> searchConcertsByCity(scanner);
+                    case 5 -> maxPrice(scanner);
+                    case 6 -> priceRangeSearch(scanner);
+                    case 7 -> maxPriceMinYear(scanner);
                     case 0 -> {
                         running = false;
                         System.out.println("Returning");
@@ -222,6 +218,12 @@ public class StartupRunner implements CommandLineRunner {
 
             System.out.println();
         }
+    }
+
+    public void searchConcertsByCity(Scanner scanner){
+        System.out.print("City: ");
+        String city = scanner.nextLine();
+        printList(concertService.findConcertByCity(city));
     }
 
     public void searchByYear(Scanner scanner){
@@ -245,10 +247,38 @@ public class StartupRunner implements CommandLineRunner {
         printList(concertService.findConcertByVenue(venue));
     }
 
+    public void maxPrice(Scanner scanner) {
+        System.out.print("Max price: ");
+        double price = scanner.nextDouble();
+        scanner.nextLine();
+
+        printList(concertService.findByMaxPrice(price));
+    }
+
+    public void maxPriceMinYear(Scanner scanner){
+        System.out.print("Max price: ");
+        double mPrice = scanner.nextDouble();
+        System.out.print("Earliest Year: ");
+        int year = scanner.nextInt();
+        scanner.nextLine();
+
+        printList(concertService.findByMaxPriceMinYear(mPrice,year));
+    }
+
+    public void priceRangeSearch(Scanner scanner){
+        System.out.print("Max Price: ");
+        double maxPrice = scanner.nextDouble();
+        System.out.println("Min price: ");
+        double minPrice = scanner.nextDouble();
+        scanner.nextLine();
+
+        printList(concertService.findPriceRange(maxPrice,minPrice));
+    }
+
     public void searchVenueAction(Scanner scanner) {
         boolean running = true;
         while (running) {
-            searchMenu();
+            venueMenu();
             System.out.print("Input: ");
 
             if (!scanner.hasNextLine()) {
@@ -309,8 +339,8 @@ public class StartupRunner implements CommandLineRunner {
         }
     }
 
-    public <T> void printList(List<T> List){
-        for (T t : List){
+    public <T> void printList(List<T> list){
+        for (T t : list){
             System.out.println(t);
         }
     }

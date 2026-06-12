@@ -115,6 +115,22 @@ public class ConcertService {
         return venueRepository.findVenueByCapacityGreaterThan(minCapacity);
     }
 
+    public List<Concert> findConcertByCity(String city){
+        return concertRepository.search(city);
+    }
+
+    public List<Concert> findByMaxPrice(double price){
+        return concertRepository.findConcertByTicketPriceLessThanEqual(price);
+    }
+
+    public List<Concert> findPriceRange(double max, double min){
+        return concertRepository.search(max, min);
+    }
+
+    public List<Concert> findByMaxPriceMinYear(double maxP, int minY){
+        return concertRepository.search(maxP, minY);
+    }
+
 
 
 
