@@ -1,4 +1,4 @@
-package com.pluralsight.sneakerdrop.concerttracker;
+package com.pluralsight.concerttracker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,8 +12,8 @@ public class ConcertTrackerApplication {
 
 
 
-    /* classes/models(venue(name,city,capacity))(artist(name,genre))(promoter(name))(concert(year,ticket price, tickets that have been sold,artist,venue,promoter))
-    make database myself in mySQL
+    /* classes/models(venue(name,city,capacity))(artist(name,genre))(promoter(name))(concert(year,ticket price, tickets that have been sold,artist,venue,promoter)) DONE
+    make database myself in mySQL DONE
     make service layers for the models which is responsible for communicating with the database
     make startuprunner that communicates with the service layers
 
@@ -35,6 +35,6 @@ public class ConcertTrackerApplication {
    sort by ticket price(lowest) or by year
    report of concerts at or above 90% capacity
    store real dates instead of just year
-   a fourth relationship of my own you can say tours for example 
+   a fourth relationship of my own you can say tours for example
      */
 }

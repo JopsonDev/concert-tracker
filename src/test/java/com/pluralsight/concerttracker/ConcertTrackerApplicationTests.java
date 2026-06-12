@@ -1,4 +1,4 @@
-package com.pluralsight.sneakerdrop.concerttracker;
+package com.pluralsight.concerttracker;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
